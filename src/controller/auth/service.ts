@@ -32,7 +32,7 @@ export const handleLogin = async (c: Context<{}, any, {}>) => {
             redirectUrl = await google.redirect({
                 options: {
                     clientId: GOOGLE_CLIENT_ID,
-                    redirectTo: `${SERVICE_URL}/auth/callback/google`,
+                    redirectTo: `${SERVICE_URL}/auth/callback`,
                     state: redirectAfterLogin,
                 },
             })
@@ -62,7 +62,7 @@ export const handleGoogleCallback = async (c: Context<{}, any, {}>) => {
         options: {
             clientSecret: GOOGLE_CLIENT_SECRET,
             clientId: GOOGLE_CLIENT_ID,
-            redirectUrl: `${SERVICE_URL}/auth/callback/google`,
+            redirectUrl: `${SERVICE_URL}/auth/callback`,
         },
         request,
     })

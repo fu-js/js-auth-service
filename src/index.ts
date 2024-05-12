@@ -8,18 +8,8 @@ const app = new Hono()
 
 app.use(logger(log))
 
-app.use(
-    "/api/v1/",
-    cors({
-        origin: [
-            "http://localhost:3000",
-            "http://localhost:3001",
-            "https://*.jsclub.dev",
-        ],
-        allowMethods: ["GET", "POST", "PUT", "DELETE"],
-    })
-)
+app.use("/auth/*", cors())
 
-app.route("/", auth)
+app.route("/auth", auth)
 
 export default app

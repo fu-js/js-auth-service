@@ -7,7 +7,7 @@ app.post("/login", async (c: Context<{}, any, {}>) => {
     return await handleLogin(c)
 })
 
-app.get("/callback/google", async (c: Context<{}, any, {}>) => {
+app.get("/callback", async (c: Context<{}, any, {}>) => {
     return await handleGoogleCallback(c)
 })
 
