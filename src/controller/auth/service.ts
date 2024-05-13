@@ -42,7 +42,13 @@ export const handleLogin = async (c: Context<{}, any, {}>) => {
     }
 
     console.log(`Google auth: ${redirectUrl}`)
-    return c.redirect(redirectUrl)
+    return c.json(
+        {
+            url: redirectUrl,
+            code: 302,
+        },
+        302
+    )
 }
 
 export const handleGoogleCallback = async (c: Context<{}, any, {}>) => {
