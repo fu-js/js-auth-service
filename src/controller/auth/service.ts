@@ -85,8 +85,8 @@ export const handleGoogleCallback = async (c: Context<{}, any, {}>) => {
     const { data } = await getUser(user.email, sp)
 
     if (!data || data.length === 0) {
-        const { data } = await createUser(user, sp)
-        userData = data!
+        const { data: newData } = await createUser(user, sp)
+        userData = newData![0]
     } else {
         userData = data![0]
     }
@@ -143,12 +143,15 @@ const getUser = async (email: string, supabase: SupabaseClient) => {
 }
 
 const createUser = async (user: any, supabase: SupabaseClient<Database>) => {
-    return await supabase.from("users").insert({
-        email: user.email,
-        name: user.name,
-        given_name: user.given_name,
-        family_name: user.family_name,
-        picture: user.picture,
-        locale: user.locale,
-    })
+    return await supabase
+        .from("users")
+        .insert({
+            email: user.email,
+            name: user.name,
+            given_name: user.given_name,
+            family_name: user.family_name,
+            picture: user.picture,
+            locale: user.locale,
+        })
+        .select("*")
 }
